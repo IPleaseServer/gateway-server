@@ -16,10 +16,22 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation ("org.springframework.boot:spring-boot-starter-actuator")
+    testImplementation ("org.springframework.boot:spring-boot-starter-test")
+    implementation ("org.springframework.boot:spring-boot-starter-webflux")
+    implementation ("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation ("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    implementation ("org.springframework.cloud:spring-cloud-starter-config")
+    implementation ("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+    testImplementation ("io.projectreactor:reactor-test")
+    implementation ("org.springdoc:springdoc-openapi-webflux-ui:1.5.10")
+}
+
+dependencyManagement {
+    imports {
+        val springCloudVersion = "2021.0.0"
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}")
+    }
 }
 
 tasks.withType<KotlinCompile> {
