@@ -1,7 +1,6 @@
 server:
   port: 12000
   address: 127.0.0.1
-  shutdown: graceful
 spring:
   rabbitmq:
     host: ${MQ_HOSTNAME}

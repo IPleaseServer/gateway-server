@@ -1,7 +1,6 @@
 server:
   port: ${GATEWAY_SERVER_PORT}
   address: ${GATEWAY_SERVER_IP}
-  shutdown: graceful
 spring:
   rabbitmq:
     host: ${MQ_HOSTNAME}
