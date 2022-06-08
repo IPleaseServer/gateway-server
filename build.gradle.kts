@@ -16,16 +16,37 @@ repositories {
 }
 
 dependencies {
+    //proto-libs
+//    implementation(files("libs/proto-lib-1.0.1-RELEASE.jar"))
+    //armeria
+//    implementation(platform("com.linecorp.armeria:armeria-bom:1.16.0"))
+//    implementation("com.linecorp.armeria:armeria")
+//    implementation("com.linecorp.armeria:armeria-grpc")
+//    implementation("com.linecorp.armeria:armeria-spring-boot2-webflux-starter")
+    //grpc
+//    implementation("io.grpc:grpc-protobuf:1.45.1")
+//    implementation("io.grpc:grpc-stub:1.45.1")
+//    implementation("com.salesforce.servicelibs:reactor-grpc-stub:1.2.3")
+//    implementation("io.grpc:grpc-okhttp:1.0.1")
+    //annotation
+    compileOnly("javax.annotation:javax.annotation-api:1.3.2")
+    compileOnly("jakarta.annotation:jakarta.annotation-api:2.0.0")
+    //kotlin
+    implementation ("io.projectreactor.kotlin:reactor-kotlin-extensions:1.1.6")
+    //spring boot
     implementation ("org.springframework.boot:spring-boot-starter-actuator")
+    implementation ("org.springframework.boot:spring-boot-starter-amqp")
     implementation ("org.springframework.boot:spring-boot-starter-webflux")
-    implementation ("org.springframework.cloud:spring-cloud-starter-gateway")
-    implementation ("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
-    implementation ("org.springframework.cloud:spring-cloud-starter-config")
-    implementation ("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+    //spring doc
     implementation ("org.springdoc:springdoc-openapi-webflux-ui:1.6.8")
+    implementation("net.logstash.logback:logstash-logback-encoder:7.1.1")
+    //spring cloud
+    implementation ("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation ("org.springframework.cloud:spring-cloud-starter-config")
+    implementation ("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
+    //test
     testImplementation ("org.springframework.boot:spring-boot-starter-test")
     testImplementation ("io.projectreactor:reactor-test")
-    implementation("net.logstash.logback:logstash-logback-encoder:7.1.1")
 }
 
 dependencyManagement {
