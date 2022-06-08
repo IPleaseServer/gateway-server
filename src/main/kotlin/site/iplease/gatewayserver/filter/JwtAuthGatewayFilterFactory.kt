@@ -8,7 +8,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
-import site.iplease.gatewayserver.dto.AccountDto
+import site.iplease.gatewayserver.data.dto.AccountDto
 import site.iplease.gatewayserver.config.FilterConfig
 import site.iplease.gatewayserver.service.AuthTokenService
 

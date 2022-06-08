@@ -1,4 +1,4 @@
-package site.iplease.gatewayserver.dto
+package site.iplease.gatewayserver.data.dto
 
 data class AccountDto (
     val accountId: Long,
