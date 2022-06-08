@@ -1,7 +1,7 @@
 package site.iplease.gatewayserver.service
 
 import org.springframework.http.HttpHeaders
-import site.iplease.gatewayserver.dto.AccountDto
+import site.iplease.gatewayserver.data.dto.AccountDto
 
 interface AuthTokenService {
     fun extractToken(headers: HttpHeaders): String
