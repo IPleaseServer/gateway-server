@@ -14,7 +14,7 @@ class HttpProfileService(
         webClientBuilder.baseUrl("lb://account-server")
             .build()
             .get()
-            .uri("/access-token/$accessToken")
+            .uri("/api/v1/account/profile/access-token/$accessToken")
             .retrieve()
             .bodyToMono(ProfileResponse::class.java)
 
@@ -22,7 +22,7 @@ class HttpProfileService(
         webClientBuilder.baseUrl("lb://account-server")
             .build()
             .get()
-            .uri("/access-token/$accessToken/exists")
+            .uri("/api/v1/account/profile/access-token/$accessToken/exists")
             .retrieve()
             .bodyToMono(ProfileExistsResponse::class.java)
             .map { it.isExists }
