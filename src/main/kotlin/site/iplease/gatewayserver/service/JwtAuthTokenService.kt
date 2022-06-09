@@ -2,9 +2,11 @@ package site.iplease.gatewayserver.service
 
 import org.springframework.http.HttpHeaders
 import org.springframework.stereotype.Service
+import reactor.core.publisher.Mono
 import reactor.kotlin.core.publisher.toMono
 import site.iplease.gatewayserver.data.dto.AccountDto
 import site.iplease.gatewayserver.data.response.ProfileResponse
+import site.iplease.gatewayserver.data.type.PermissionType
 
 @Service
 class JwtAuthTokenService(
@@ -14,6 +16,10 @@ class JwtAuthTokenService(
         Unit.toMono()
             .map { headers.containsKey(HttpHeaders.AUTHORIZATION) }
             .map { containAuthHeader -> if(containAuthHeader) headers[HttpHeaders.AUTHORIZATION]!![0].contains("Bearer ") else false }
+
+    override fun validPermission(permissions: List<PermissionType>, permission: PermissionType): Mono<Boolean> =
+        Unit.toMono().map { permissions.contains(permission) }
+
     override fun extractToken(headers: HttpHeaders) =
         Unit.toMono()
             .map { headers.getOrEmpty(HttpHeaders.AUTHORIZATION)[0] }
