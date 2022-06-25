@@ -19,7 +19,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: busrefresh
 eureka:
   instance:
     hostname: ${EUREKA_HOSTNAME}
