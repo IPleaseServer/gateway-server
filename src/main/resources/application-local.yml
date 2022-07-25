@@ -1,6 +1,6 @@
 server:
-  port: 8080
-  address: 127.0.0.1
+  port: ${GATEWAY_SERVER_PORT}
+  address: ${GATEWAY_SERVER_IP}
 spring:
   rabbitmq:
     host: ${MQ_HOSTNAME}
@@ -19,7 +19,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: busrefresh
+        include: refresh
 eureka:
   instance:
     hostname: ${EUREKA_HOSTNAME}
