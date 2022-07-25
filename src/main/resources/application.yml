@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: prod
+    active: ${SPRING_PROFILE}
 logging:
   config: classpath:logback/logback-${spring.profiles.active}.xml
 server:
