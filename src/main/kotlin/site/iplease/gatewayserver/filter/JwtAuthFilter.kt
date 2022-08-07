@@ -5,6 +5,7 @@ import org.springframework.cloud.gateway.filter.GatewayFilter
 import org.springframework.cloud.gateway.filter.GatewayFilterChain
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory
 import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.server.reactive.ServerHttpRequest
 import org.springframework.http.server.reactive.ServerHttpResponse
@@ -36,6 +37,7 @@ class JwtAuthFilter(
                 .map { account -> process(account = account, request = exchange.request) } //요청에 대한 필터링 로직을 수행한다.
                 .let { mono -> handleError(mono) } //mono내에서 발생한 오류를 핸들링한다.
                 .map { status -> checkGuestPolicy(status = status, permissions = permissions) } //GUEST에 대한 예외정책을 검사한다.
+                .map { status -> checkCorsPolicy(status = status, exchange = exchange) }
                 .flatMap { status -> complete(status = status, chain = chain, exchange = exchange) } //인증상태에 따라, 필터링 로직을 마무리한다.
         } }
 
@@ -61,6 +63,10 @@ class JwtAuthFilter(
     //만약 GUEST의 접근이 허용된다면, 토큰인증여부에 관계없이 검증을 통과시킨다. (단, 인증에 성공하여, 계정정보를 받아왔을 경우 제외)
     private fun checkGuestPolicy(status: AuthorizeStatusType, permissions: List<PermissionType>)  =
         if(permissions.contains(PermissionType.GUEST) && status != AuthorizeStatusType.PERMISSION_DENIED) AuthorizeStatusType.SUCCESS else status
+
+    //만약 CORS요청이라면, 정책통과여부에 관계없이 검증을 통과시킨다.
+    private fun checkCorsPolicy(status: AuthorizeStatusType, exchange: ServerWebExchange) =
+        if(exchange.request.method != HttpMethod.OPTIONS) AuthorizeStatusType.SUCCESS else status
 
     //인증상태에 따라, error메세지 반환 또는 필터 체이닝등의 작업을 수행한다.
     private fun complete(status: AuthorizeStatusType, exchange: ServerWebExchange, chain: GatewayFilterChain) =
